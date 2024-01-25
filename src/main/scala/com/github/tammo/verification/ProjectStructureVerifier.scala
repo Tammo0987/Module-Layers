@@ -7,9 +7,11 @@ object ProjectStructureVerifier {
   def verify(
       module: Module,
       architectureStyle: ArchitectureStyle
-  ): Iterable[Violation] = {
+  ): Set[Violation] = {
     val potentiallyAllowedLayers =
-      architectureStyle.permits.foldLeft[Option[Set[Layer]]](Some(Set.empty)) {
+      architectureStyle.permits.foldLeft[Option[Set[Layer]]](
+        Some(Set.empty)
+      ) {
         case (None, _) => None
         case (result, PermitAll(layer)) =>
           if (module.layer == layer) {
@@ -28,7 +30,7 @@ object ProjectStructureVerifier {
     potentiallyAllowedLayers match {
       case None =>
         // None expresses the absence of forbidden layers
-        Iterable.empty
+        Set.empty
       case Some(allowedLayers) =>
         module.dependencies.flatMap(
           isDependencyViolated(module, _, allowedLayers)
