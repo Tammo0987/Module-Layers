@@ -17,7 +17,7 @@ lazy val root = project
         "https://raw.githubusercontent.com/Tammo0987/Module-Layers/main/LICENSE"
       )
     ),
-    sonatypeRepository := "https://s01.oss.sonatype.org/service/local"
+    sonatypeRepository := "https://central.sonatype.com/service/local"
   )
 
-ThisBuild / sonatypeCredentialHost := "s01.oss.sonatype.org"
+ThisBuild / sonatypeCredentialHost := "https://central.sonatype.com"
